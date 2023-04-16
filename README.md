@@ -1,7 +1,7 @@
 # Installation
 
 ```
-pip install https://github.com/asluchevskiy/slavik_crypto_api.git
+pip install git+https://github.com/asluchevskiy/slavik_crypto_api.git
 ```
 
 # Usage
