@@ -1,0 +1,2 @@
+class SlavikAPIException(Exception):
+    pass
