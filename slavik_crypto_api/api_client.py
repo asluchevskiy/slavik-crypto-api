@@ -1,4 +1,7 @@
 import requests
+from .errors import SlavikAPIError
+from requests.exceptions import HTTPError
+from simplejson.errors import JSONDecodeError
 
 
 class SlavikAPIClient:
@@ -16,14 +19,20 @@ class SlavikAPIClient:
         return f'{self.base_url}{self.api_key}{endpoint}'
 
     def _get(self, endpoint, params=None):
-        response = requests.get(self._get_url(endpoint), headers=self.headers, params=params)
-        response.raise_for_status()
-        return response.json()
+        try:
+            response = requests.get(self._get_url(endpoint), headers=self.headers, params=params)
+            # response.raise_for_status()
+            return response.json()
+        except JSONDecodeError:
+            raise SlavikAPIError('could not get valid JSON')
 
     def _post(self, endpoint, data=None, json=None):
-        response = requests.post(self._get_url(endpoint), headers=self.headers, data=data, json=json)
-        response.raise_for_status()
-        return response.json()
+        try:
+            response = requests.post(self._get_url(endpoint), headers=self.headers, data=data, json=json)
+            # response.raise_for_status()
+            return response.json()
+        except JSONDecodeError:
+            raise SlavikAPIError('could not get valid JSON')
 
     def get_userinfo(self):
         endpoint = '/get_userinfo'

@@ -1,9 +1,9 @@
 from .api_client import SlavikAPIClient
-from .errors import SlavikAPIException
+from .errors import SlavikAPIError
 
 __all__ = [
     "SlavikAPIClient",
-    "SlavikAPIException",
+    "SlavikAPIError",
 ]
 
 __version__ = "0.1.0"
